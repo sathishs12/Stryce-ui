@@ -13,10 +13,10 @@ export default function Skills({
   ],
 }: SkillsProps) {
   return (
-    <div className="w-full lg:w-[730px] lg:h-[150px] rounded-[20px] border border-[#CBCBCB] bg-white p-3 shadow-sm overflow-hidden flex flex-col">
+    <div className="w-full lg:w-[730px] lg:h-[150px] rounded-[20px] border border-[#CBCBCB] bg-white p-6 shadow-sm overflow-hidden flex flex-col">
       {/* Red Pill Header */}
-      <div className="mb-5">
-        <div className="inline-flex items-center gap-2 bg-[#EF4444] text-white px-4 py-1.5 rounded-full shadow-md shadow-red-100">
+      <div className="mb-3">
+        <div className="inline-flex items-center gap-2 bg-[#ED1D25] text-white px-4 py-1.5 rounded-full shadow-md shadow-red-100">
           <Zap className="w-3.5 h-3.5 fill-white" />
           <span className="text-[12px] font-bold">Skills</span>
         </div>

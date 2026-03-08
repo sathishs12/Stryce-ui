@@ -4,7 +4,7 @@ export default function AboutMe({ bio, experience, industry, retainer }: any) {
   return (
     <div className="bg-white p-6 rounded-[20px] border border-[#CBCBCB] w-full lg:w-[730px] min-h-[170px] flex flex-col justify-between">
       <div>
-        <div className="inline-flex items-center gap-2 bg-[#EF4444] text-white px-4 py-1.5 rounded-full mb-4">
+        <div className="inline-flex items-center gap-2 bg-[#ED1D25] text-white px-4 py-1.5 rounded-full mb-4">
           <User className="w-3.5 h-3.5 fill-white" />
           <span className="text-[12px] font-bold">About Me</span>
         </div>

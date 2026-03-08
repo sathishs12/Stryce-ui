@@ -49,12 +49,18 @@ const creators: Creator[] = [
       { name: "Meta Blueprint", issuer: "Certified Media Buying Professional" }
     ],
     portfolio: [
-      {
+       {
         title: "Skincare brand scale-up",
         description: "Achieved 4.5x ROAS in 3 months",
-        image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&h=300&fit=crop",
+        image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&fit=crop",
         link: "#",
-      }
+      },
+      {
+        title: "UGC funnel for fashion brand",
+        description: "Video ad campaign resulting in 2k+ leads",
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&fit=crop",
+        link: "#",
+      },
     ],
   },
   {
@@ -92,17 +98,17 @@ export default function ProfilePage() {
 
 return (
     <div className="bg-[#FAFBFC] min-h-screen">
-      <div className="max-w-[1250px] mx-auto px-4 py-8 space-y-6">
+      <div className="max-w-[1250px] mx-auto px-4 sm:px-6 py-4 sm:py-8 space-y-6">
         
         {/* Full Width Hero Banner Area */}
-        <div className="w-full">
+        {/* <div className="max-w-[1250px] mx-auto px-4 sm:px-6 py-6 space-y-6"> */}
             <ProfileHero
                 name={creator.name}
                 role={creator.role}
                 avatarImage={creator.avatarImage}
                 coverImage={creator.profileImage} 
             />
-        </div>
+        {/* </div> */}
 
         {/* Responsive Grid matching design widths */}
         <div className="flex flex-col lg:flex-row gap-8 items-start">
@@ -118,12 +124,15 @@ return (
             {/* Skills & Certifications also follow 730px width */}
                 <Skills />
                 <Certifications />
+                 <Portfolio items={creator.portfolio} />
           </div>
 
           {/* Right Side: 436px */}
           <aside className="w-full lg:w-[436px] flex flex-col gap-6">
             <ContactDetails />
-            {/* Profile URL component... */}
+            <ProfileUrl username={creator.slug} />
+            
+            <TalentBadges />
           </aside>
           
         </div>

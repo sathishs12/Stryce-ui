@@ -18,10 +18,10 @@ export default function Certifications({
   ],
 }: CertificationsProps) {
   return (
-    <div className="w-full lg:w-[730px] rounded-[20px] border border-[#CBCBCB] bg-white p-3 shadow-sm">
+    <div className="w-full lg:w-[730px] rounded-[20px] border border-[#CBCBCB] bg-white p-6 shadow-sm">
       {/* Red Pill Header */}
-      <div className="mb-6">
-        <div className="inline-flex items-center gap-2 bg-[#EF4444] text-white px-4 py-1.5 rounded-full shadow-md shadow-red-100">
+      <div className="mb-3">
+        <div className="inline-flex items-center gap-2 bg-[#ED1D25] text-white px-4 py-1.5 rounded-full shadow-md shadow-red-100">
           <Award className="w-3.5 h-3.5 text-white" />
           <span className="text-[12px] font-bold">Certifications</span>
         </div>

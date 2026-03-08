@@ -8,25 +8,27 @@ import HiringAgencies from "../sections/hiring-agencies"
 import SuggestedLeads from "../sections/suggested-leads"
 import MvpPurpose from "../sections/mvp-purpose"
 import CreatorFeed from "../sections/creator-card"
+import MobileNavbar from "@/components/ui/layout/MobileNavbar"
 
 export default function FeedTemplate() {
   const [searchQuery, setSearchQuery] = useState("")
 
   return (
-    <div className="bg-[#FAFBFC] min-h-screen px-4 py-6 md:p-8">
+    <div className="bg-[#FAFBFC] min-h-screen px-4 py-6 md:p-8 md:pb-8">
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        {/* LEFT SIDEBAR - Stacks on top on mobile */}
-        <aside className="col-span-1 lg:col-span-3 order-1 flex flex-col gap-6">
+        {/* SIDEBAR - HIDDEN ON MOBILE */}
+        <aside className="hidden lg:flex col-span-3 flex-col gap-6">
           <ProfileCard />
           <MvpPurpose />
           <Filters />
         </aside>
 
         {/* CENTER FEED */}
-        <main className="col-span-1 lg:col-span-6 order-2 space-y-4">
-          {/* Search Input */}
-          <div className="relative group w-full">
+        <main className="col-span-1 lg:col-span-6 space-y-4">
+          
+          {/* Search Input - Hidden on Mobile (Moved to Header) */}
+          <div className="hidden md:block relative group w-full">
             <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
             <input
               type="text"
@@ -39,35 +41,31 @@ export default function FeedTemplate() {
 
           {/* Feed Header */}
           <div className="flex flex-col md:flex-row md:items-center justify-between px-2 gap-3 mb-4">
-            <h2 className="text-[15px] font-bold text-gray-800 tracking-tight">
-              Work Feed . Performers Marketers Only
+            <h2 className="text-[13px] md:text-[15px] font-bold text-gray-800">
+              Work Feed <span className="text-gray-400 mx-1">/</span> Performers Only
             </h2>
-            <div className="inline-flex h-[27px] border-[0.5px] border-[#2571FF] rounded-full items-center justify-center bg-white shadow-sm px-4">
-              <span className="text-[#2571FF] text-[10px] font-bold flex items-center gap-1 uppercase">
-                Media-first <span className="opacity-40">●</span> Work Only
+            <div className="inline-flex h-[27px] border-[0.5px] border-[#2571FF] rounded-full items-center px-4 bg-white shadow-sm">
+              <span className="text-[#2571FF] text-[9px] md:text-[10px] font-bold uppercase">
+                Media-first ● Work Only
               </span>
             </div>
           </div>
 
-          {/* The List of Cards */}
           <CreatorFeed searchQuery={searchQuery} />
         </main>
 
-        {/* RIGHT SIDEBAR */}
-        <aside className="col-span-1 lg:col-span-3 order-3 space-y-6">
+        {/* RIGHT SIDEBAR - Hidden on mobile except specific components if needed */}
+        <aside className="hidden lg:block col-span-3 space-y-6">
           <HiringAgencies />
           <div className="w-full bg-[#FFF1F1] p-6 rounded-[2rem] shadow-sm">
-            <h4 className="font-bold text-gray-800 flex items-center gap-2 mb-3 text-[15px]">
-              <span className="bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-white text-[11px] font-black shrink-0">!</span>
-              The Stryce Mission
-            </h4>
-            <p className="text-[13px] text-gray-400 leading-relaxed">
-              This is not a social network. The feed is engineered for <span className="text-gray-800 font-bold">unlock intent</span>.
-            </p>
+             {/* Mission content... */}
           </div>
           <SuggestedLeads />
         </aside>
       </div>
+      
+      {/* Add the Mobile Navbar here */}
+      <MobileNavbar />
     </div>
   )
 }

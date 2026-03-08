@@ -42,7 +42,7 @@ const creators: Creator[] = [
   },
   {
     id: 3,
-     slug: "sarah-chen",
+     slug: "alex-rivera",
     name: "Sarah Chen",
     role: "UGC Specialist | Beauty",
     description: "Created viral hooks that reduced CPA by 40% for top beauty brands.",

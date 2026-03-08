@@ -79,7 +79,7 @@ export default function ContactDetails({
         <div className="space-y-3">
           <Button
             onClick={handleUnlock}
-            className="w-full h-[48px] bg-red-500 hover:bg-red-600 rounded-xl font-bold text-[14px] text-white shadow-lg shadow-red-100 transition-all active:scale-[0.98]"
+            className="w-full h-[48px] bg-[#ED1D25] hover:bg-red-600 rounded-xl font-bold text-[14px] text-white shadow-lg shadow-red-100 transition-all active:scale-[0.98]"
           >
             Unlock Contact
           </Button>

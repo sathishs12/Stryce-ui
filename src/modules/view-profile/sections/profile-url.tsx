@@ -1,34 +1,60 @@
-import { Copy, Link } from "lucide-react"
+"use client"
+
+import { Copy, CheckCircle2 } from "lucide-react"
+import { useState } from "react"
 
 interface ProfileUrlProps {
   username?: string
 }
 
 export default function ProfileUrl({ username = "johndoe" }: ProfileUrlProps) {
-  const url = `Stryce.com/@${username}`
+  const [copied, setCopied] = useState(false)
+  const url = `Stryce.com /f/ ${username}`
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(`https://${url}`)
+    // Clean URL for clipboard
+    const cleanUrl = `https://stryce.com/f/${username.replace(/\s/g, '')}`
+    navigator.clipboard.writeText(cleanUrl)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
   }
 
   return (
-    <div className="w-full rounded-[18px] border border-gray-100 shadow-sm bg-white p-5">
-      <div className="flex items-center gap-2 mb-3">
-        <div className="bg-red-50 p-1.5 rounded-lg">
-          <Link className="w-4 h-4 text-red-500" />
-        </div>
-        <h2 className="font-bold text-[14px] text-gray-900">Profile URL</h2>
+    // Removed fixed h-[204]. Added responsive padding and rounded corners.
+    <div className="w-full max-w-[436px] rounded-[24px] sm:rounded-[32px] border border-gray-100 bg-white p-5 sm:p-6 shadow-sm transition-all">
+      
+      {/* 1. Red Pill Header */}
+      <div className="mb-5 sm:mb-6">
+        <span className="bg-[#EE2B2B] text-white text-[12px] sm:text-[14px] font-bold px-4 py-1.5 rounded-full inline-block shadow-sm shadow-red-100">
+          Profile URL
+        </span>
       </div>
 
-      <div className="flex items-center gap-2 border border-gray-200 rounded-full px-4 py-2.5 bg-gray-50">
-        <span className="text-[13px] text-gray-500 flex-1 truncate">{url}</span>
-        <button onClick={handleCopy} className="p-1 rounded-full hover:bg-gray-200 transition-colors" title="Copy URL">
-          <Copy className="w-3.5 h-3.5 text-gray-400" />
+      {/* 2. URL Input Box */}
+      <div className="flex items-center border border-gray-100 rounded-[16px] sm:rounded-[20px] overflow-hidden bg-white mb-4 transition-colors focus-within:border-gray-300">
+        
+        {/* URL Text Area - Adjusted font size for mobile to prevent early truncation */}
+        <div className="flex-1 px-4 sm:px-5 py-3 sm:py-4 text-[13px] sm:text-[15px] text-gray-400 font-medium truncate select-all">
+          {url}
+        </div>
+        
+        {/* Copy Button - shrink-0 prevents the button from squishing on small screens */}
+        <button 
+          onClick={handleCopy}
+          className="shrink-0 px-4 sm:px-6 py-3 sm:py-4 border-l border-gray-100 hover:bg-gray-50 active:bg-gray-100 transition-all flex items-center justify-center min-w-[56px] sm:min-w-[64px]"
+          title="Copy to clipboard"
+        >
+          {copied ? (
+            <CheckCircle2 className="w-5 h-5 text-green-500 animate-in zoom-in duration-300" />
+          ) : (
+            <Copy className="w-5 h-5 text-[#EE2B2B] transition-transform active:scale-90" strokeWidth={2.5} />
+          )}
         </button>
       </div>
 
-      <p className="text-[11px] text-gray-400 mt-2 leading-relaxed">
-        Public Profile URL is always viewable. Only contact details are behind the paywall.
+      {/* 3. Footer Text */}
+      <p className="text-[11px] sm:text-[13px] text-gray-400 leading-relaxed font-medium px-1">
+        Public Profile URL is always <span className="text-gray-500">Viewable</span>. Only contact details behind the paywall
       </p>
     </div>
   )

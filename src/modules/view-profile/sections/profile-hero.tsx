@@ -1,6 +1,8 @@
 "use client"
+
 import { CheckCircle2 } from "lucide-react"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import Image from "next/image"
 
 interface ProfileHeroProps {
   name: string
@@ -11,39 +13,53 @@ interface ProfileHeroProps {
 
 export default function ProfileHero({ name, role, avatarImage, coverImage }: ProfileHeroProps) {
   return (
-    <div className="w-full max-w-[1196px] mx-auto relative rounded-[2rem] overflow-hidden bg-white shadow-sm border border-gray-100">
-      {/* ── Banner Image (Fixed 1196x315 Ratio) ── */}
-      <div className="relative w-full h-[200px] sm:h-[315px] bg-[#000] overflow-hidden">
-        <img 
-          src={coverImage || "https://images.unsplash.com/photo-1557683316-973673baf926"} 
-          alt="cover" 
-          className="w-full h-full object-cover" 
+    <div className="w-full max-w-[1196px] mx-auto overflow-hidden rounded-[24px] sm:rounded-[2rem] bg-white shadow-sm border border-gray-100">
+      {/* Aspect ratio: square-ish on mobile to show the silhouette, wide on desktop */}
+      <div className="relative w-full aspect-[1/1] xs:aspect-[4/3] sm:aspect-[1196/315] bg-black">
+        <Image
+          src="/image/view-profile.jpg" 
+          alt="cover"
+          fill
+          className="object-cover object-center"
+          priority
         />
         
-        {/* The Blue Silhouette Effect - Simplified CSS version */}
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-             <div className="w-[300px] h-[300px] bg-[#00A3FF] rounded-full blur-[100px] opacity-40 translate-x-20" />
-        </div>
+        {/* Gradient for mobile text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent sm:hidden" />
 
-        {/* ── Floating Name Card ── */}
-        <div className="absolute -bottom-1 left-6">
-          <div className="bg-white rounded-t-[1.5rem] rounded-br-[1.5rem] px-5 py-3 flex items-center gap-4 shadow-xl border-t border-l border-r border-gray-50 min-w-[280px]">
+        {/* Floating Name Card */}
+        <div className="absolute bottom-0 left-0 w-full sm:w-auto">
+          <div 
+            className="bg-white px-4 py-3 sm:px-5 sm:py-4 flex items-center gap-3 sm:gap-4 shadow-2xl 
+                       w-full sm:w-auto sm:min-w-[380px] border-t border-gray-100 sm:border-r"
+            style={{ 
+              borderRadius: "0px 20px 0px 0px",
+            }}
+          >
+            {/* Avatar - Slightly smaller on mobile to save space */}
             <div className="relative shrink-0">
-                <Avatar className="h-14 w-14 rounded-2xl border-4 border-white shadow-md bg-gray-100">
+                <Avatar className="h-11 w-11 sm:h-16 sm:w-16 rounded-xl sm:rounded-2xl border-2 sm:border-4 border-white shadow-md">
                     <AvatarImage src={avatarImage} className="object-cover" />
                 </Avatar>
                 <span className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-green-500 border-2 border-white" />
             </div>
 
-            <div className="flex flex-col">
-                <div className="flex items-center gap-2">
-                    <h1 className="text-[16px] font-bold text-gray-900 tracking-tight">{name}</h1>
-                    <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#EFF6FF] border border-blue-100">
+            {/* Text Container - Removed truncate on name for mobile */}
+            <div className="flex flex-col min-w-0 flex-1">
+                <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                    <h1 className="text-[15px] sm:text-[20px] font-bold text-gray-900 whitespace-nowrap">
+                      {name}
+                    </h1>
+                    <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-[#EFF6FF] border border-blue-100 shrink-0">
                         <CheckCircle2 className="h-3 w-3 fill-[#2571FF] text-white" />
-                        <span className="text-[#2571FF] text-[8px] font-black uppercase">Verified Profile</span>
+                        <span className="text-[#2571FF] text-[7px] sm:text-[10px] font-black uppercase tracking-wider">
+                          Verified
+                        </span>
                     </div>
                 </div>
-                <p className="text-[12px] font-medium text-gray-400 mt-0.5">{role}</p>
+                <p className="text-[11px] sm:text-[13px] font-medium text-gray-400 truncate mt-0.5">
+                  {role}
+                </p>
             </div>
           </div>
         </div>
