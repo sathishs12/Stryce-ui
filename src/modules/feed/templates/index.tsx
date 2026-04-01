@@ -9,10 +9,17 @@ import SuggestedLeads from "../sections/suggested-leads"
 import MvpPurpose from "../sections/mvp-purpose"
 import CreatorFeed from "../sections/creator-card"
 import MobileNavbar from "@/components/ui/layout/MobileNavbar"
+import { usePathname } from "next/navigation"
 
 export default function FeedTemplate() {
   const [searchQuery, setSearchQuery] = useState("")
+  const pathname = usePathname()
 
+  const shouldHideNavbar =
+    pathname === "/" || pathname.startsWith("/signup")
+
+
+  // const shouldHideNavbar = hideNavbarRoutes.includes(pathname)
   return (
     <div className="bg-[#FAFBFC] min-h-screen px-4 py-6 md:p-8 md:pb-8">
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -65,7 +72,7 @@ export default function FeedTemplate() {
       </div>
       
       {/* Add the Mobile Navbar here */}
-      <MobileNavbar />
+      {!shouldHideNavbar && <MobileNavbar />}
     </div>
   )
 }

@@ -8,6 +8,9 @@ import ProfileCard from "@/modules/feed/sections/profile-card"
 
 export default function MobileNavbar() {
   const pathname = usePathname()
+  // ✅ Hide on auth pages (covers all query param variants too)
+  const authRoutes = ["/", "/signup"]
+  if (authRoutes.includes(pathname)) return null
 
   const NavItem = ({ icon: Icon, href, label }: any) => {
     const active = pathname === href
@@ -28,12 +31,12 @@ export default function MobileNavbar() {
       
       {/* Profile Trigger */}
       <Sheet>
-        <SheetTrigger asChild>
-          <button className="flex flex-col items-center gap-1 flex-1">
-            <User className="h-5 w-5 text-gray-400" />
-            <span className="text-[10px] font-bold text-gray-400">Profile</span>
-          </button>
-        </SheetTrigger>
+       <SheetTrigger asChild>
+  <div className="flex flex-col items-center gap-1 flex-1 cursor-pointer">
+    <User className="h-5 w-5 text-gray-400" />
+    <span className="text-[10px] font-bold text-gray-400">Profile</span>
+  </div>
+</SheetTrigger>
         <SheetContent side="bottom" className="rounded-t-[2rem] p-4 bg-[#FAFBFC]">
             <SheetHeader className="sr-only">
                 <SheetTitle>User Profile</SheetTitle>
