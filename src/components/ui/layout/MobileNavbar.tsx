@@ -9,7 +9,7 @@ import ProfileCard from "@/modules/feed/sections/profile-card"
 export default function MobileNavbar() {
   const pathname = usePathname()
   // ✅ Hide on auth pages (covers all query param variants too)
-  const authRoutes = ["/", "/signup"]
+  const authRoutes = ["/", "/signup", "/post-job"]
   if (authRoutes.includes(pathname)) return null
 
   const NavItem = ({ icon: Icon, href, label }: any) => {

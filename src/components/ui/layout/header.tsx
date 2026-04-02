@@ -12,7 +12,7 @@ export default function Header() {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  const isAuthPage = pathname === "/" || pathname === "/signup"
+  const isAuthPage = pathname === "/" || pathname === "/signup" || pathname === "/post-job"
   const isSignupPage = pathname === "/signup"
   const loginType = searchParams.get("type")
 
@@ -80,9 +80,12 @@ export default function Header() {
               </>
             )}
 
-            <Button className="bg-red-500 hover:bg-red-600 text-white rounded-full text-[11px] sm:text-sm px-2.5 sm:px-5 h-8 sm:h-9 whitespace-nowrap">
-              Post a Job
-            </Button>
+            <Button
+  onClick={() => router.push("/post-job")}
+  className="bg-red-500 hover:bg-red-600 text-white rounded-full text-[11px] sm:text-sm px-2.5 sm:px-5 h-8 sm:h-9 whitespace-nowrap"
+>
+  Post a Job
+</Button>
           </div>
 
         ) : (
