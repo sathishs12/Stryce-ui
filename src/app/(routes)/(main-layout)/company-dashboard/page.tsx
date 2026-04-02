@@ -1,5 +1,6 @@
 import UnderConstruction from "@/components/ui/layout/under-construction";
+import CompanyDashboard from "@/modules/company-dashboard/templates";
 
-export default function CompanyDashboard() {
-  return <UnderConstruction title="Company Dashboard" />
+export default function CompanyDashboardpage() {
+  return <CompanyDashboard />
 }

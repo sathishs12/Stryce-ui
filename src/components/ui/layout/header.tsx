@@ -116,22 +116,64 @@ export default function Header() {
             </div>
 
             {/* DESKTOP NAV — hidden on mobile */}
-            <nav className="hidden md:flex items-center gap-1">
-              <Link href="/feed">
-                <Button className="bg-red-500 hover:bg-red-600 text-white rounded-full px-5 text-xs font-bold h-9">
-                  Feed
-                </Button>
-              </Link>
-              <Button variant="ghost" className="text-xs font-semibold text-gray-500 rounded-full">
-                Company Dashboard
-              </Button>
-              <Button variant="ghost" className="text-xs font-semibold text-gray-500 rounded-full">
-                Freelancer Dashboard
-              </Button>
-              <Button variant="ghost" className="text-xs font-semibold text-gray-500 rounded-full">
-                Admin
-              </Button>
-            </nav>
+<nav className="hidden md:flex items-center gap-1">
+  
+  {/* FEED */}
+  <Link href="/feed">
+    <Button variant="ghost"
+      className={`rounded-full px-5 text-xs font-bold h-9 ${
+        pathname === "/feed"
+          ? "bg-red-500 text-white"
+          : "text-gray-500 hover:bg-gray-100"
+      }`}
+    >
+      Feed
+    </Button>
+  </Link>
+
+  {/* COMPANY DASHBOARD */}
+  <Link href="/company-dashboard">
+    <Button
+      variant="ghost"
+      className={`rounded-full text-xs font-semibold ${
+        pathname === "/company-dashboard"
+          ? "bg-red-500 text-white"
+          : "text-gray-500"
+      }`}
+    >
+      Company Dashboard
+    </Button>
+  </Link>
+
+  {/* FREELANCER */}
+  <Link href="/freelancer-dashboard">
+    <Button
+      variant="ghost"
+      className={`rounded-full text-xs font-semibold ${
+        pathname === "/freelancer-dashboard"
+          ? "bg-red-500 text-white"
+          : "text-gray-500"
+      }`}
+    >
+      Freelancer Dashboard
+    </Button>
+  </Link>
+
+  {/* ADMIN */}
+  <Link href="/admin">
+    <Button
+      variant="ghost"
+      className={`rounded-full text-xs font-semibold ${
+        pathname === "/admin"
+          ? "bg-red-500 text-white"
+          : "text-gray-500"
+      }`}
+    >
+      Admin
+    </Button>
+  </Link>
+
+</nav>
 
             {/* DESKTOP RIGHT ICONS */}
             <div className="hidden md:flex items-center gap-3">

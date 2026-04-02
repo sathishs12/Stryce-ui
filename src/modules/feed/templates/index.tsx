@@ -21,7 +21,7 @@ export default function FeedTemplate() {
 
   // const shouldHideNavbar = hideNavbarRoutes.includes(pathname)
   return (
-    <div className="bg-[#FAFBFC] min-h-screen px-4 py-6 md:p-8 md:pb-8">
+    <div className="bg-[#FAFBFC] min-h-screen px-4 py-6 pb-24 md:p-8 md:pb-8">
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* SIDEBAR - HIDDEN ON MOBILE */}
@@ -64,9 +64,36 @@ export default function FeedTemplate() {
         {/* RIGHT SIDEBAR - Hidden on mobile except specific components if needed */}
         <aside className="hidden lg:block col-span-3 space-y-6">
           <HiringAgencies />
-          <div className="w-full bg-[#FFF1F1] p-6 rounded-[2rem] shadow-sm">
-             {/* Mission content... */}
-          </div>
+        <div className="w-full bg-[#FFF1F1] rounded-[24px] overflow-hidden border border-[#F3DADA]">
+
+  {/* HEADER */}
+  <div className="flex items-center gap-3 px-5 py-4 border-b border-[#F3DADA]">
+    <div className="h-8 w-8 rounded-full bg-[#ED1D25] flex items-center justify-center">
+      <span className="text-white font-bold text-sm">!</span>
+    </div>
+
+    <p className="text-[16px] font-semibold text-black">
+      The Stryce Mission
+    </p>
+  </div>
+
+  {/* CONTENT */}
+  <div className="px-5 py-5">
+    <p className="text-[14px] leading-relaxed text-gray-600">
+      This is not a social network. The feed is engineered for{" "}
+      <span className="text-black font-semibold">
+        unlock intent
+      </span>{" "}
+      — media-first, work-only posts that make it safe to buy.
+    </p>
+
+    {/* CTA */}
+    <button className="mt-5 text-[#ED1D25] font-semibold text-[15px] flex items-center gap-1 hover:gap-2 transition-all">
+      Learn More →
+    </button>
+  </div>
+
+</div>
           <SuggestedLeads />
         </aside>
       </div>
