@@ -31,7 +31,7 @@ export default function TestimonialCarousel({ items }: Props) {
   );
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 mt-10">
+    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 mt-0">
       <Carousel
         plugins={[autoplay.current]}
         className="w-full"
