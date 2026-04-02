@@ -31,13 +31,15 @@ function Sparkline() {
     return `${x},${y}`
   })
 
-  const points = pointsArray.join(" ")
   const pathData = getSmoothPath(pointsArray)
-
   const areaPath = `${pathData} L ${width},${height} L 0,${height} Z`
 
   return (
-    <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-[180px]">
+    <svg
+      viewBox={`0 0 ${width} ${height}`}
+      className="w-full h-[140px] sm:h-[160px] md:h-[180px]"
+      preserveAspectRatio="none"
+    >
       <defs>
         <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#ED1D25" stopOpacity="0.2" />
@@ -45,10 +47,8 @@ function Sparkline() {
         </linearGradient>
       </defs>
 
-      {/* Area */}
       <path d={areaPath} fill="url(#areaGradient)" />
 
-      {/* Line */}
       <path
         d={pathData}
         fill="none"
@@ -70,39 +70,40 @@ export default function UnlocksPerformance({
   changePercent = 12,
 }: Props) {
   return (
-    <Card className="rounded-[20px] border border-[#CBCBCB] shadow-none">
-      <CardContent className="p-6">
+    <Card className="w-full h-auto lg:h-[360px] rounded-2xl border border-[#CBCBCB] shadow-none">
+      <CardContent className="p-4 sm:p-5 md:p-6">
 
         {/* Header */}
-        <div className="flex justify-between items-start">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
+          
           <div>
-            <p className="text-[15px] font-normal text-black/70 tracking-wide uppercase">
-              UNLOCKS PERFORMANCE
+            <p className="text-xs sm:text-sm text-black/60 uppercase tracking-wide">
+              Unlocks Performance
             </p>
 
-            <h2 className="text-[30px] font-bold text-black mt-1">
+            <h2 className="text-2xl sm:text-3xl md:text-[30px] font-bold text-black mt-1">
               {totalUnlocks} Unlocks
             </h2>
           </div>
 
           {/* Badge */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] border border-[#0C996D] text-[#0C996D] text-[14px] font-bold">
+          <div className="flex items-center gap-1 px-2.5 py-1 rounded-lg border border-[#0C996D] text-[#0C996D] text-xs sm:text-sm font-semibold w-fit">
             <TrendingUp className="w-4 h-4" />
             +{changePercent}%
           </div>
         </div>
 
         {/* Chart */}
-        <div className="mt-5">
+        <div className="mt-4 sm:mt-5">
           <Sparkline />
         </div>
 
         {/* Days */}
-        <div className="flex justify-between mt-3 px-2">
+        <div className="flex justify-between mt-2 sm:mt-3 px-1 sm:px-2 overflow-x-auto">
           {DAYS.map((d) => (
             <span
               key={d}
-              className="text-[14px] text-black/50 font-normal"
+              className="text-[10px] sm:text-xs md:text-sm text-black/50 whitespace-nowrap"
             >
               {d}
             </span>

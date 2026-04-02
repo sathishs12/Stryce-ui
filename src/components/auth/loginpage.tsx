@@ -81,7 +81,7 @@ const handleLogin = () => {
 
       {/* TOP LOGIN SECTION */}
       {/* <div className="flex min-h-screen items-center justify-center px-4 sm:px-6 py-8 md:py-0"> */}
-        <div className="flex min-h-[100dvh] md:min-h-screen items-start md:items-center justify-center px-4 sm:px-6 py-8 md:py-0">
+        <div className="flex items-start md:items-center justify-center px-4 sm:px-6 py-6 md:py-12">
         <div className="w-full max-w-6xl flex flex-col md:flex-row rounded-2xl overflow-hidden">
 
           {/* LEFT SIDE — hidden on mobile */}
