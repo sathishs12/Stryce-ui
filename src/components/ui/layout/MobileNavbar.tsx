@@ -5,13 +5,32 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet"
 import ProfileCard from "@/modules/feed/sections/profile-card"
+import { useEffect, useState } from "react"
 
 export default function MobileNavbar() {
   const pathname = usePathname()
   // ✅ Hide on auth pages (covers all query param variants too)
   const authRoutes = ["/", "/signup", "/post-job"]
   if (authRoutes.includes(pathname)) return null
+const [showNav, setShowNav] = useState(true)
+const [lastScrollY, setLastScrollY] = useState(0)
 
+useEffect(() => {
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY
+
+    if (currentScrollY > lastScrollY && currentScrollY > 50) {
+      setShowNav(false)
+    } else {
+      setShowNav(true)
+    }
+
+    setLastScrollY(currentScrollY)
+  }
+
+  window.addEventListener("scroll", handleScroll)
+  return () => window.removeEventListener("scroll", handleScroll)
+}, [lastScrollY])
   const NavItem = ({ icon: Icon, href, label }: any) => {
     const active = pathname === href
     return (
@@ -23,7 +42,12 @@ export default function MobileNavbar() {
   }
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-2 py-3 z-50 flex items-center justify-around pb-safe">
+    <div
+  className={`md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-2 py-3 z-50 flex items-center justify-around pb-safe transition-transform duration-300 ${
+    showNav ? "translate-y-0" : "translate-y-full"
+  }`}
+>
+    {/* // <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-2 py-3 z-50 flex items-center justify-around pb-safe"> */}
       <NavItem icon={Rss} href="/feed" label="Feed" />
       <NavItem icon={LayoutDashboard} href="/company-dashboard" label="Company" />
       <NavItem icon={UserSquare2} href="/freelancer-dashboard" label="Freelancer" />

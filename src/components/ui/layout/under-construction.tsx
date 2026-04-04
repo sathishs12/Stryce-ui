@@ -6,7 +6,8 @@ import Link from "next/link"
 
 export default function UnderConstruction({ title }: { title: string }) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+    <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4 pt-[70px] md:pt-[80px]">
+      
       <div className="w-20 h-20 bg-red-50 rounded-3xl flex items-center justify-center mb-6">
         <Construction className="h-10 w-10 text-red-500" />
       </div>
@@ -25,6 +26,7 @@ export default function UnderConstruction({ title }: { title: string }) {
           Back to Feed
         </Button>
       </Link>
+
     </div>
   )
 }

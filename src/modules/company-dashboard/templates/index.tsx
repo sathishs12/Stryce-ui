@@ -13,7 +13,8 @@ import WelcomeBar from "../sections/welcomebar"
 
 export default function CompanyDashboard() {
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 pb-[100px] md:pb-6">
+    // <div className="min-h-screen bg-gray-50 p-4 sm:p-6 pb-[100px] md:pb-6">
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 pt-[70px] md:pt-[80px] pb-[100px] md:pb-6">
       <div className="max-w-[1200px] mx-auto">
 
         {/* Welcome + credits */}

@@ -26,6 +26,8 @@
 //     </html>
 //   )
 // }
+
+
 "use client";
 
 import "./globals.css";
@@ -34,6 +36,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Header from "@/components/ui/layout/header";
 import MobileNavbar from "@/components/ui/layout/MobileNavbar";
 import { Suspense } from "react";
+import BackToTop from "@/components/ui/layout/BackToTop";
 
 export default function RootLayout({
   children,
@@ -51,7 +54,7 @@ export default function RootLayout({
           </Suspense>
 
           <main className="min-h-screen">{children}</main>
-
+ <BackToTop />
           <MobileNavbar />
 
           <Toaster />

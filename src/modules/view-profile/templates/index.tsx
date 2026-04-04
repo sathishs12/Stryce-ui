@@ -97,7 +97,8 @@ export default function ProfilePage() {
   }
 
 return (
-    <div className="bg-[#FAFBFC] min-h-screen">
+    // <div className="bg-[#FAFBFC] min-h-screen">
+    <div className="bg-[#FAFBFC] min-h-screen pt-[70px] md:pt-[80px]">
       <div className="max-w-[1250px] mx-auto px-4 sm:px-6 py-4 sm:py-8 space-y-6">
         
         {/* Full Width Hero Banner Area */}

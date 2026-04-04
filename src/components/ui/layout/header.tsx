@@ -6,18 +6,89 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetDescription } from "@/components/ui/sheet"
 import Link from "next/link"
 import Filters from "@/modules/feed/sections/filters"
+import { X } from "lucide-react"
+import { useEffect, useState } from "react"
 
 export default function Header() {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
+const search = searchParams.get("q") || "" 
+  const searchQuery = searchParams.get("q") || ""
 
   const isAuthPage = pathname === "/" || pathname === "/signup" || pathname === "/post-job"
   const isSignupPage = pathname === "/signup"
   const loginType = searchParams.get("type")
+  const urlQuery = searchParams.get("q") || ""
+const [showHeader, setShowHeader] = useState(true)
+const [lastScrollY, setLastScrollY] = useState(0)
+
+useEffect(() => {
+  const handleScroll = () => {
+    // ✅ apply only on mobile screens
+    if (window.innerWidth >= 768) {
+      setShowHeader(true)
+      return
+    }
+
+    const currentScroll = window.scrollY
+
+    if (currentScroll > lastScrollY && currentScroll > 80) {
+      setShowHeader(false)
+    } else {
+      setShowHeader(true)
+    }
+
+    setLastScrollY(currentScroll)
+  }
+
+  window.addEventListener("scroll", handleScroll)
+  return () => window.removeEventListener("scroll", handleScroll)
+}, [lastScrollY])
+// ✅ local state
+const [inputValue, setInputValue] = useState(urlQuery)
+
+// ✅ sync when URL changes
+useEffect(() => {
+  setInputValue(urlQuery)
+}, [urlQuery])
+
+// ✅ debounce URL update
+useEffect(() => {
+  const delay = setTimeout(() => {
+    const params = new URLSearchParams(searchParams.toString())
+
+    if (inputValue) {
+      params.set("q", inputValue)
+    } else {
+      params.delete("q")
+    }
+
+    router.replace(`?${params.toString()}`) // ✅ important
+  }, 400)
+
+  return () => clearTimeout(delay)
+}, [inputValue])
+
+const handleSearch = (value: string) => {
+  const params = new URLSearchParams(searchParams.toString())
+
+  if (value) {
+    params.set("q", value)
+  } else {
+    params.delete("q")
+  }
+
+  router.push(`?${params.toString()}`)
+}
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/80 backdrop-blur-md">
+<header
+  className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
+    showHeader ? "translate-y-0" : "-translate-y-full"
+  } bg-white/80 backdrop-blur-md border-b`}
+>
+    {/* // <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/80 backdrop-blur-md"> */}
       <div className="flex w-full items-center justify-between px-4 sm:px-6 md:px-12 py-3">
 
         {/* LEFT — LOGO */}
@@ -92,14 +163,27 @@ export default function Header() {
           <>
             {/* MOBILE — search input + filter sheet */}
             <div className="flex md:hidden flex-1 items-center gap-2 px-3">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="w-full bg-gray-100 border-none rounded-full py-2 pl-9 pr-4 text-xs focus:ring-1 focus:ring-red-200 outline-none"
-                />
-              </div>
+            <div className="relative flex-1">
+  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+
+  <input
+    type="text"
+    value={inputValue}
+    onChange={(e) => setInputValue(e.target.value)}
+    placeholder="Search..."
+    className="w-full bg-gray-100 border-none rounded-full py-2 pl-9 pr-10 text-xs focus:ring-1 focus:ring-red-200 outline-none"
+  />
+
+  {/* ✅ CLEAR BUTTON */}
+  {inputValue && (
+    <button
+      onClick={() => setInputValue("")}
+      className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-gray-200"
+    >
+      <X className="h-4 w-4 text-gray-500" />
+    </button>
+  )}
+</div>
               <Sheet>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon" className="h-9 w-9 bg-gray-100 rounded-full flex-shrink-0">
