@@ -302,17 +302,19 @@ function CreatorCard({
 
       {/* ================= DESKTOP ================= */}
       <div className="hidden md:block">
-        <div className="flex flex-row rounded-[2rem] border border-gray-100 shadow-sm overflow-hidden bg-white">
-          
-          <div className="w-[220px] shrink-0">
-            <img
-              src={creator.profileImage}
-              className="w-full h-full object-cover"
-              alt={creator.name}
-            />
-          </div>
+  <div className="flex flex-row rounded-[2rem] border border-gray-100 shadow-sm overflow-hidden bg-white min-h-[240px]">
+    
+    {/* IMAGE */}
+    <div className="w-[220px] h-[260px] shrink-0">
+      <img
+        src={creator.profileImage}
+        className="w-full h-full object-cover"
+        alt={creator.name}
+      />
+    </div>
 
-           <div className="p-5 flex flex-col flex-1">
+    {/* CONTENT */}
+    <div className="p-5 flex flex-col flex-1">
           <div className="flex-1">
            <div className="flex items-center gap-3 mb-3">
               <Avatar className="h-10 w-10 md:h-12 md:w-12 border border-gray-100 shrink-0">
